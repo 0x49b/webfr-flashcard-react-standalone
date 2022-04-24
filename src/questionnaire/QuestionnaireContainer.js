@@ -1,17 +1,35 @@
+import _ from 'lodash';
+import { Component } from 'react';
+import { Col, Row } from 'reactstrap';
 import QuestionnaireCreateDialog from './QuestionnaireCreateDialog';
 import QuestionnaireTable from './QuestionnaireTable';
-import {Row, Col} from 'reactstrap';
 
-const QuestionnaireContainer = ({ qs }) =>
-    <div>
+const ID = 'id';
+const DEFAULT_ID = 0;
+
+class QuestionnaireContainer extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = { qs: this.props.qs};
+  }
+
+  id = qs =>   _.get(_.maxBy(qs, ID), ID, DEFAULT_ID) + 1
+
+  create = questionnaire => this.setState({ qs: _.concat(this.state.qs, { id: this.id(this.state.qs), ...questionnaire }) })
+  delete = questionnaire => this.setState({ ws: _.reject(this.state.qs, function(q) { return q.id === questionnaire.id } )})
+
+  render() {
+    return <div>
         <Row>
-          <Col><h3>Questionnaires</h3></Col>
-          <Col><QuestionnaireCreateDialog/></Col>
+            <Col><h3>Questionnaires</h3></Col>
+            <Col><QuestionnaireCreateDialog create={ this.create } /></Col>
         </Row>
-        
-          <QuestionnaireTable qs={ qs } />
-        
+        <QuestionnaireTable qs={ this.state.qs } delete={this.delete} />
     </div>
+  }
+
+}
 
 QuestionnaireContainer.defaultProps = {
     qs:[

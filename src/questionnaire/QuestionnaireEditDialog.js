@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from 'reactstrap';
 
-class QuestionnaireShowDialog extends Component {
+class QuestionnaireEditDialog extends Component {
     constructor(props) {
         super(props)
         this.state = { showModal: false }
@@ -19,7 +19,7 @@ class QuestionnaireShowDialog extends Component {
     render() {
         return (
           <div>
-            <Button color="secondary" onClick={this.open}>Show</Button>
+            <Button color="primary" onClick={this.open}>Edit</Button>
           
             
             <Modal isOpen={ this.state.showModal } toggle={ this.close } size="lg" 
@@ -65,4 +65,4 @@ class QuestionnaireShowDialog extends Component {
       }
 };
 
-export default QuestionnaireShowDialog;
+export default QuestionnaireEditDialog;
