@@ -1,10 +1,16 @@
-import React from 'react'
-import QuestionnaireTable from './QuestionnaireTable'
+import QuestionnaireCreateDialog from './QuestionnaireCreateDialog';
+import QuestionnaireTable from './QuestionnaireTable';
+import {Row, Col} from 'reactstrap';
 
 const QuestionnaireContainer = ({ qs }) =>
     <div>
-        <h3>Questionnaires</h3>
-        <QuestionnaireTable qs={ qs } />
+        <Row>
+          <Col><h3>Questionnaires</h3></Col>
+          <Col><QuestionnaireCreateDialog/></Col>
+        </Row>
+        
+          <QuestionnaireTable qs={ qs } />
+        
     </div>
 
 QuestionnaireContainer.defaultProps = {
